@@ -2,86 +2,166 @@ Lembre-se sempre antes de realizar qualquer coisa ligue o servidor local com um 
 
 
 Modelo de requisiçao get: 
-/login
-{
-    "email":
-    "nome do email",
-    "pass":
-    "senha"
-}
+/categoria
+
 retorno do Get:
-TRUE : em casos de usuario e senha localizados
-FALSE: em caso de usuario e senha nao localizados ou achados em duplicidade
+Toda a tabela categoria
 
 
-/livros 
-Nao necessita de req
+/produto
 
-retorna uma lista com o conteudo de catalogo_livros do banco de dados. 
+retorno do Get:
+Toda a tabela produto
+
+/fornecedor
+
+retorno do Get:
+Toda a tabela fornecedor
+
+/estoque
+
+retorno do Get:
+Toda a tabela estoque
+
+/pedidos
+
+retorno do get:
+Toda a tabela pedidos
 
 
-Modelo de requisiçao post: (/cadastro_livros)
+Modelo de requisiçao post:
+
+(/cadastro_produtos)
 {
-   "titulo": "nome livro",
-   "autor": "nome autor",
-   "link": "url",
-   "editora": "edt"
+   "nome": "nome do produto",
+   "valor": valor do produto,
+   "IDcategoria": ID da categoria,
+   "IDfornecedor": ID do fornecedor,
+   "link": "link"
 }
-retorno do post /cadastro_livros:
-TRUE : em caso de sucesso na inserçao do banco
-FALSE: para todos os demais casos
+retorno 
+mensagem de confirmaçao de atualizaçao
+ou msg de erro cm respectivo erro
 
-Modelo de requisiçao post: (/cadastro_usuario)
+(/cadastro_fornecedor)
 {
-   "nome": "nome do usuario",
-   "email": "email para login",
-   "senha": "senha para login"
+   "nome": "nome do fornecedor",
+   "email": "email",
+   "cnpj": "cnpj 11 digitos",
+   "telefone": "telefone de contato"
 }
-retorno do post /cadastro_usuario:
-TRUE : em caso de sucesso na inserçao do banco
-FALSE: para todos os demais casos
+
+retorno 
+mensagem de confirmaçao de atualizaçao
+ou msg de erro cm respectivo erro
+
+(/cadastro_estoque)
+{
+   "quantidade": quantidade existente,
+   "IDproduto": produto referencia
+}
+
+retorno 
+mensagem de confirmaçao de atualizaçao
+ou msg de erro cm respectivo erro
+
+(/cadastro_pedido)
+{
+   "IDpedido": numero do pedido,
+   "IDestoque": id do produto no estoque,
+   "valor": valor do item
+}
+
+retorno 
+mensagem de confirmaçao de atualizaçao
+ou msg de erro cm respectivo erro
 
 Modelo de PUT:
 
-existem 4 caminhos sendo eles '/update_link', '/update_titulo', '/update_autor' e '/update_editora'
 
-/update_link
+(/update_produto)
 {
-   "new_link": "novo link",
-   "titulo": "titulo de referencia"
+   "nome": "novo nome",
+   "valor": novo valor,
+   "IDcategoria": novo ID da categoria(nao deixar vazio),
+   "IDfornecedor": novo ID do fornecedor(nao deixar vazio),
+   "link": "novo link"
+   "id": id do produto que sera atualizado
 }
+retorno 
+mensagem de confirmaçao de atualizaçao
+ou msg de erro cm respectivo erro
 
 
-/update_titulo
+(/update_quantidade) {atualiza apenas a quantidade de um item no estoque sem precisar atualizar o item junto}
 {
-   "new_titulo": "novo titulo",
-   "link": "link de referencia"
+   "quantidade": "nova quantidade",
+   "id": id que sera atualizado
 }
+retorno 
+mensagem de confirmaçao de atualizaçao
+ou msg de erro cm respectivo erro
 
-
-/update_autor
+(/update_fornecedor)
 {
-   "new_autor": "novo autor",
-   "titulo": "titulo de referencia"
+   "nome": "novo nome",
+   "email": "novo email",
+   "cnpj": "novo cnpj",
+   "telefone": "novo telefone",
+   "link": "novo link"
+   "id": id que sera atualizado
 }
+retorno 
+mensagem de confirmaçao de atualizaçao
+ou msg de erro cm respectivo erro
 
 
-/update_editora
+(/update_estoque)
 {
-   "new_editora": "nova editora",
-   "titulo": "titulo de referencia"
+   "quantidade": "nova quantidade",
+   "IDproduto": "novo produto",
+   "id": id que sera atualizado
 }
-
-todas retornao true ou false,
-sendo que o false so será retornado caso tenha erro junto do erro no console(da api) 
+retorno 
+mensagem de confirmaçao de atualizaçao
+ou msg de erro cm respectivo erro
 
 
 Modelo de Delete:
 
-'/delete_livro'
+'/delete_produto'
 {
-   "titulo": "titulo para delete"
+   "id": "id para delete"
 }
 
-retorno de true ou false 
+retorno 
+mensagem de confirmaçao de inserçao
+ou msg de erro cm respectivo erro 
+
+'/delete_fornecedor'
+{
+   "id": "id para delete"
+}
+
+retorno 
+mensagem de confirmaçao de inserçao
+ou msg de erro cm respectivo erro 
+
+'/delete_estoque'
+{
+   "id": "id para delete"
+}
+
+retorno 
+mensagem de confirmaçao de inserçao
+ou msg de erro cm respectivo erro 
+
+'/delete_pedido'
+{
+   "id": "id para delete"
+}
+
+retorno 
+mensagem de confirmaçao de inserçao
+ou msg de erro cm respectivo erro 
 
